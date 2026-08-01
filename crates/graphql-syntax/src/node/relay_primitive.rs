@@ -21,11 +21,26 @@ pub struct Token {
     pub kind: TokenKind,
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
+#[derive(Clone, Copy, Eq, PartialEq, Hash)]
 pub struct Identifier {
-    pub span: Span,
     pub token: Token,
     pub value: StringKey,
+}
+
+impl fmt::Debug for Identifier {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Identifier")
+            .field("span", &self.span())
+            .field("token", &self.token)
+            .field("value", &self.value)
+            .finish()
+    }
+}
+
+impl Identifier {
+    pub fn span(&self) -> Span {
+        self.token.span
+    }
 }
 
 impl fmt::Display for Identifier {
@@ -48,7 +63,7 @@ impl PartialOrd for Identifier {
 
 impl Identifier {
     pub fn name_with_location(&self, file: SourceLocationKey) -> WithLocation<StringKey> {
-        WithLocation::from_span(file, self.span, self.value)
+        WithLocation::from_span(file, self.span(), self.value)
     }
 }
 

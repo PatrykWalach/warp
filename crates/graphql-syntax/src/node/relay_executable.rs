@@ -42,7 +42,7 @@ impl ExecutableDefinition {
 
     pub fn name_location(&self) -> Option<Location> {
         self.name_identifier()
-            .map(|identifier| self.location().with_span(identifier.span))
+            .map(|identifier| self.location().with_span(identifier.span()))
     }
 
     pub fn has_directive(&self, directive_name: StringKey) -> bool {
@@ -238,7 +238,7 @@ impl fmt::Debug for FragmentSpread {
 
 impl FragmentSpread {
     pub fn span(&self) -> Span {
-        let mut end = self.name.span.end;
+        let mut end = self.name.span().end;
         if let Some(arguments) = &self.arguments {
             end = end.max(arguments.span.end);
         }
@@ -309,8 +309,8 @@ impl LinkedField {
         let start = self
             .alias
             .as_ref()
-            .map_or_else(|| self.name.span.start, |a| a.span.start);
-        let mut end = self.name.span.end;
+            .map_or_else(|| self.name.span().start, |a| a.span.start);
+        let mut end = self.name.span().end;
         if let Some(arguments) = &self.arguments {
             end = end.max(arguments.span.end);
         }
@@ -347,8 +347,8 @@ impl ScalarField {
         let start = self
             .alias
             .as_ref()
-            .map_or_else(|| self.name.span.start, |a| a.span.start);
-        let mut end = self.name.span.end;
+            .map_or_else(|| self.name.span().start, |a| a.span.start);
+        let mut end = self.name.span().end;
         if let Some(arguments) = &self.arguments {
             end = end.max(arguments.span.end);
         }
