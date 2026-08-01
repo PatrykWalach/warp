@@ -42,19 +42,19 @@ impl TypeSystemDefinition {
         match self {
             TypeSystemDefinition::SchemaDefinition(_extension) => Span::empty(), // Not implemented
             TypeSystemDefinition::SchemaExtension(_extension) => Span::empty(),  // Not implemented
-            TypeSystemDefinition::ObjectTypeExtension(extension) => extension.name.span,
-            TypeSystemDefinition::ObjectTypeDefinition(extension) => extension.name.span,
-            TypeSystemDefinition::InterfaceTypeDefinition(extension) => extension.name.span,
-            TypeSystemDefinition::InterfaceTypeExtension(extension) => extension.name.span,
-            TypeSystemDefinition::UnionTypeDefinition(extension) => extension.name.span,
-            TypeSystemDefinition::UnionTypeExtension(extension) => extension.name.span,
-            TypeSystemDefinition::DirectiveDefinition(extension) => extension.name.span,
-            TypeSystemDefinition::InputObjectTypeDefinition(extension) => extension.name.span,
-            TypeSystemDefinition::InputObjectTypeExtension(extension) => extension.name.span,
-            TypeSystemDefinition::EnumTypeDefinition(extension) => extension.name.span,
-            TypeSystemDefinition::EnumTypeExtension(extension) => extension.name.span,
-            TypeSystemDefinition::ScalarTypeDefinition(extension) => extension.name.span,
-            TypeSystemDefinition::ScalarTypeExtension(extension) => extension.name.span,
+            TypeSystemDefinition::ObjectTypeExtension(extension) => extension.name.span(),
+            TypeSystemDefinition::ObjectTypeDefinition(extension) => extension.name.span(),
+            TypeSystemDefinition::InterfaceTypeDefinition(extension) => extension.name.span(),
+            TypeSystemDefinition::InterfaceTypeExtension(extension) => extension.name.span(),
+            TypeSystemDefinition::UnionTypeDefinition(extension) => extension.name.span(),
+            TypeSystemDefinition::UnionTypeExtension(extension) => extension.name.span(),
+            TypeSystemDefinition::DirectiveDefinition(extension) => extension.name.span(),
+            TypeSystemDefinition::InputObjectTypeDefinition(extension) => extension.name.span(),
+            TypeSystemDefinition::InputObjectTypeExtension(extension) => extension.name.span(),
+            TypeSystemDefinition::EnumTypeDefinition(extension) => extension.name.span(),
+            TypeSystemDefinition::EnumTypeExtension(extension) => extension.name.span(),
+            TypeSystemDefinition::ScalarTypeDefinition(extension) => extension.name.span(),
+            TypeSystemDefinition::ScalarTypeExtension(extension) => extension.name.span(),
         }
     }
 }
@@ -183,7 +183,6 @@ impl From<SchemaExtension> for SchemaDefinition {
         Self {
             directives: ext.directives,
             operation_types: ext.operation_types.unwrap_or(List {
-                span: Span::empty(),
                 start: Token {
                     span: Span::empty(),
                     kind: TokenKind::OpenBrace,

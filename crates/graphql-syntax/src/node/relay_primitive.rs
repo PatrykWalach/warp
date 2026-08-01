@@ -21,11 +21,26 @@ pub struct Token {
     pub kind: TokenKind,
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
+#[derive(Clone, Copy, Eq, PartialEq, Hash)]
 pub struct Identifier {
-    pub span: Span,
     pub token: Token,
     pub value: StringKey,
+}
+
+impl fmt::Debug for Identifier {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Identifier")
+            .field("span", &self.span())
+            .field("token", &self.token)
+            .field("value", &self.value)
+            .finish()
+    }
+}
+
+impl Identifier {
+    pub fn span(&self) -> Span {
+        self.token.span
+    }
 }
 
 impl fmt::Display for Identifier {
@@ -48,22 +63,37 @@ impl PartialOrd for Identifier {
 
 impl Identifier {
     pub fn name_with_location(&self, file: SourceLocationKey) -> WithLocation<StringKey> {
-        WithLocation::from_span(file, self.span, self.value)
+        WithLocation::from_span(file, self.span(), self.value)
     }
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
+#[derive(Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct List<T> {
-    pub span: Span,
     pub start: Token,
     pub items: Vec<T>,
     pub end: Token,
 }
 
+impl<T: fmt::Debug> fmt::Debug for List<T> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("List")
+            .field("span", &self.span())
+            .field("start", &self.start)
+            .field("items", &self.items)
+            .field("end", &self.end)
+            .finish()
+    }
+}
+
 impl<T> List<T> {
+    pub fn span(&self) -> Span {
+        Span {
+            start: self.start.span.start,
+            end: self.end.span.end,
+        }
+    }
     pub fn generated(items: Vec<T>) -> Self {
         Self {
-            span: Span::empty(),
             start: Token {
                 span: Span::empty(),
                 kind: TokenKind::OpenBrace,

@@ -34,8 +34,8 @@ impl ConstantValue {
             ConstantValue::Boolean(value) => value.token.span,
             ConstantValue::Null(value) => value.span,
             ConstantValue::Enum(value) => value.token.span,
-            ConstantValue::List(value) => value.span,
-            ConstantValue::Object(value) => value.span,
+            ConstantValue::List(value) => value.span(),
+            ConstantValue::Object(value) => value.span(),
         }
     }
     pub fn get_string_literal(&self) -> Option<StringKey> {
