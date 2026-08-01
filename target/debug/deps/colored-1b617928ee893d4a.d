@@ -1,0 +1,12 @@
+E:\projekty\warp\target\debug\deps\colored-1b617928ee893d4a.d: C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\lib.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\color.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\control.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\error.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\style.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\customcolors.rs
+
+E:\projekty\warp\target\debug\deps\libcolored-1b617928ee893d4a.rlib: C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\lib.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\color.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\control.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\error.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\style.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\customcolors.rs
+
+E:\projekty\warp\target\debug\deps\libcolored-1b617928ee893d4a.rmeta: C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\lib.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\color.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\control.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\error.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\style.rs C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\customcolors.rs
+
+C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\lib.rs:
+C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\color.rs:
+C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\control.rs:
+C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\error.rs:
+C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\style.rs:
+C:\Users\Patryk\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\colored-2.2.0\src\customcolors.rs:
