@@ -39,7 +39,7 @@ impl TypeAnnotation {
 
     pub fn span(&self) -> Span {
         match self {
-            TypeAnnotation::Named(named) => named.name.span,
+            TypeAnnotation::Named(named) => named.name.span(),
             TypeAnnotation::List(of) => (*of).span,
             TypeAnnotation::NonNull(of) => (*of).span,
         }
