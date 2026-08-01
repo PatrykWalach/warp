@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "labels": ["dependencies"],
+  "extends": [
+    "config:best-practices",
+    "group:allDigest",
+    "group:allNonMajor",
+    ":pinAllExceptPeerDependencies",
+    // ":automergeStableNonMajor",
+    "schedule:daily",
+    ":separateMultipleMajorReleases"
+  ],
+  "packageRules": [
+    {
+      "groupName": "digests",
+      "matchDepTypes": ["action"],
+      "matchUpdateTypes": ["digest"],
+      "automerge": false
+    }
+  ],
+  "automergeType": "branch",
+  "ignoreDeps": ["pnpm"]
+}
