@@ -1330,7 +1330,6 @@ impl<'a> Parser<'a> {
         if self.peek_token_kind() == TokenKind::OpenBrace {
             let selections = self.parse_selections()?;
             Ok(Selection::LinkedField(LinkedField {
-                span: Span::new(start, self.end_index),
                 alias,
                 name,
                 arguments,
@@ -1339,7 +1338,6 @@ impl<'a> Parser<'a> {
             }))
         } else {
             Ok(Selection::ScalarField(ScalarField {
-                span: Span::new(start, self.end_index),
                 alias,
                 name,
                 arguments,
@@ -1351,7 +1349,6 @@ impl<'a> Parser<'a> {
     /// FragmentSpread : ... FragmentName Directives?
     /// InlineFragment : ... TypeCondition? Directives? SelectionSet
     fn parse_spread(&mut self) -> ParseResult<Selection> {
-        let start = self.index();
         let spread = self.parse_kind(TokenKind::Spread)?;
         let is_on_keyword = self.peek_keyword("on");
         if !is_on_keyword && self.peek_token_kind() == TokenKind::Identifier {
@@ -1364,7 +1361,6 @@ impl<'a> Parser<'a> {
             };
             let directives = self.parse_directives()?;
             Ok(Selection::FragmentSpread(FragmentSpread {
-                span: Span::new(start, self.end_index),
                 spread,
                 name,
                 arguments,
@@ -1380,7 +1376,6 @@ impl<'a> Parser<'a> {
             let directives = self.parse_directives()?;
             let selections = self.parse_selections()?;
             Ok(Selection::InlineFragment(InlineFragment {
-                span: Span::new(start, self.end_index),
                 spread,
                 type_condition,
                 directives,
