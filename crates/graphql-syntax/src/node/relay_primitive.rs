@@ -67,18 +67,33 @@ impl Identifier {
     }
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
+#[derive(Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct List<T> {
-    pub span: Span,
     pub start: Token,
     pub items: Vec<T>,
     pub end: Token,
 }
 
+impl<T: fmt::Debug> fmt::Debug for List<T> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("List")
+            .field("span", &self.span())
+            .field("start", &self.start)
+            .field("items", &self.items)
+            .field("end", &self.end)
+            .finish()
+    }
+}
+
 impl<T> List<T> {
+    pub fn span(&self) -> Span {
+        Span {
+            start: self.start.span.start,
+            end: self.end.span.end,
+        }
+    }
     pub fn generated(items: Vec<T>) -> Self {
         Self {
-            span: Span::empty(),
             start: Token {
                 span: Span::empty(),
                 kind: TokenKind::OpenBrace,

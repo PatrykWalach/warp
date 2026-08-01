@@ -79,8 +79,8 @@ impl Value {
         match self {
             Value::Constant(value) => value.span(),
             Value::Variable(value) => value.span,
-            Value::List(value) => value.span,
-            Value::Object(value) => value.span,
+            Value::List(value) => value.span(),
+            Value::Object(value) => value.span(),
         }
     }
 }

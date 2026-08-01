@@ -183,7 +183,6 @@ impl From<SchemaExtension> for SchemaDefinition {
         Self {
             directives: ext.directives,
             operation_types: ext.operation_types.unwrap_or(List {
-                span: Span::empty(),
                 start: Token {
                     span: Span::empty(),
                     kind: TokenKind::OpenBrace,

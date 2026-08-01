@@ -1409,7 +1409,6 @@ impl<'a> Parser<'a> {
                     ))
                 }
                 return Ok(Some(List {
-                    span,
                     start,
                     items,
                     end: self.empty_token(),
@@ -1496,7 +1495,10 @@ impl<'a> Parser<'a> {
             } else {
                 self.record_error(Diagnostic::error(
                     SyntaxError::Expected(TokenKind::Colon),
-                    Location::new(self.source_location, Span::new(name.span().end, self.index())),
+                    Location::new(
+                        self.source_location,
+                        Span::new(name.span().end, self.index()),
+                    ),
                 ));
                 // Continue parsing value if the next token looks like a value (except for Enum)
                 // break early if the next token is not a valid token for the next argument
@@ -1544,12 +1546,7 @@ impl<'a> Parser<'a> {
                 Location::new(self.source_location, span),
             ))
         }
-        Ok(Some(List {
-            span,
-            start,
-            items,
-            end,
-        }))
+        Ok(Some(List { start, items, end }))
     }
 
     fn parse_optional_constant_arguments(&mut self) -> ParseResult<Option<List<ConstantArgument>>> {
@@ -1621,7 +1618,6 @@ impl<'a> Parser<'a> {
                         }
                     }
                     Ok(Value::Constant(ConstantValue::List(List {
-                        span: list.span,
                         start: list.start,
                         items: constants,
                         end: list.end,
@@ -1651,7 +1647,6 @@ impl<'a> Parser<'a> {
                         });
                     }
                     Ok(Value::Constant(ConstantValue::Object(List {
-                        span: list.span,
                         start: list.start,
                         items: arguments,
                         end: list.end,
@@ -1917,13 +1912,7 @@ impl<'a> Parser<'a> {
         }
         let end = self.parse_kind(end_kind)?;
 
-        let span = Span::new(start.span.start, end.span.end);
-        Ok(List {
-            span,
-            start,
-            items,
-            end,
-        })
+        Ok(List { start, items, end })
     }
 
     /// Parse delimited items into a `List`
@@ -1948,7 +1937,6 @@ impl<'a> Parser<'a> {
             self.record_error(error);
             let token = self.empty_token();
             return Ok(List {
-                span: token.span,
                 start: token.clone(),
                 items: vec![],
                 end: token,
@@ -1969,12 +1957,7 @@ impl<'a> Parser<'a> {
             ));
         }
 
-        Ok(List {
-            span,
-            start,
-            items,
-            end,
-        })
+        Ok(List { start, items, end })
     }
 
     /// (<start> <item>+ <end>)?

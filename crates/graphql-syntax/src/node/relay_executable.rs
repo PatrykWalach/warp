@@ -240,7 +240,7 @@ impl FragmentSpread {
     pub fn span(&self) -> Span {
         let mut end = self.name.span().end;
         if let Some(arguments) = &self.arguments {
-            end = end.max(arguments.span.end);
+            end = end.max(arguments.span().end);
         }
         if let Some(directive) = self.directives.last() {
             end = end.max(directive.span.end);
@@ -271,7 +271,7 @@ impl fmt::Debug for InlineFragment {
 
 impl InlineFragment {
     pub fn span(&self) -> Span {
-        let mut end = self.selections.span.end;
+        let mut end = self.selections.span().end;
         if let Some(type_condition) = &self.type_condition {
             end = end.max(type_condition.span.end);
         }
@@ -312,12 +312,12 @@ impl LinkedField {
             .map_or_else(|| self.name.span().start, |a| a.span.start);
         let mut end = self.name.span().end;
         if let Some(arguments) = &self.arguments {
-            end = end.max(arguments.span.end);
+            end = end.max(arguments.span().end);
         }
         if let Some(directive) = self.directives.last() {
             end = end.max(directive.span.end);
         }
-        end = end.max(self.selections.span.end);
+        end = end.max(self.selections.span().end);
         Span::new(start, end)
     }
 }
@@ -350,7 +350,7 @@ impl ScalarField {
             .map_or_else(|| self.name.span().start, |a| a.span.start);
         let mut end = self.name.span().end;
         if let Some(arguments) = &self.arguments {
-            end = end.max(arguments.span.end);
+            end = end.max(arguments.span().end);
         }
         if let Some(directive) = self.directives.last() {
             end = end.max(directive.span.end);
