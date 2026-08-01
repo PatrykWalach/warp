@@ -683,7 +683,7 @@ impl<'a> Parser<'a> {
         if interfaces.is_empty() && directives.is_empty() && fields.is_none() {
             self.record_error(Diagnostic::error(
                 "Type extension should define one of interfaces, directives or fields.",
-                Location::new(self.source_location, name.span),
+                Location::new(self.source_location, name.span()),
             ));
             return Err(());
         }
@@ -710,7 +710,7 @@ impl<'a> Parser<'a> {
         if interfaces.is_empty() && directives.is_empty() && fields.is_none() {
             self.record_error(Diagnostic::error(
                 "Interface extension should define one of interfaces, directives or fields.",
-                Location::new(self.source_location, name.span),
+                Location::new(self.source_location, name.span()),
             ));
             return Err(());
         }
@@ -1308,7 +1308,7 @@ impl<'a> Parser<'a> {
                                 TokenKind::Identifier,
                                 token_kind
                             ),
-                            Location::new(self.source_location, Span::new(start, name.span.end)),
+                            Location::new(self.source_location, Span::new(start, name.span().end)),
                         ));
                         name
                     }
@@ -1444,7 +1444,6 @@ impl<'a> Parser<'a> {
                                 ),
                             ));
                             let name = Identifier {
-                                span: node.token.span,
                                 token: node.token.clone(),
                                 value: node.value,
                             };
@@ -1478,7 +1477,7 @@ impl<'a> Parser<'a> {
                         SyntaxError::ExpectedValue,
                         Location::new(
                             self.source_location,
-                            Span::new(name.span.end, self.end_index),
+                            Span::new(name.span().end, self.end_index),
                         ),
                     ));
                     let span = Span::new(start, self.end_index);
@@ -1502,7 +1501,7 @@ impl<'a> Parser<'a> {
             } else {
                 self.record_error(Diagnostic::error(
                     SyntaxError::Expected(TokenKind::Colon),
-                    Location::new(self.source_location, Span::new(name.span.end, self.index())),
+                    Location::new(self.source_location, Span::new(name.span().end, self.index())),
                 ));
                 // Continue parsing value if the next token looks like a value (except for Enum)
                 // break early if the next token is not a valid token for the next argument
@@ -1855,7 +1854,6 @@ impl<'a> Parser<'a> {
         let span = token.span;
         match token.kind {
             TokenKind::Identifier => Ok(Identifier {
-                span,
                 token,
                 value: source.intern(),
             }),
@@ -1875,9 +1873,7 @@ impl<'a> Parser<'a> {
             TokenKind::Identifier => {
                 let token = self.parse_token();
                 let source = self.source(&token);
-                let span = token.span;
                 Identifier {
-                    span,
                     token,
                     value: source.intern(),
                 }
@@ -1886,7 +1882,7 @@ impl<'a> Parser<'a> {
                 let identifier = self.empty_identifier();
                 self.record_error(Diagnostic::error(
                     SyntaxError::Expected(TokenKind::Identifier),
-                    Location::new(self.source_location, identifier.span),
+                    Location::new(self.source_location, identifier.span()),
                 ));
                 identifier
             }
@@ -2143,7 +2139,6 @@ impl<'a> Parser<'a> {
     fn empty_identifier(&self) -> Identifier {
         let token = self.empty_token();
         Identifier {
-            span: token.span,
             token,
             value: "".intern(),
         }

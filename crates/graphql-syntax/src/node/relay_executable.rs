@@ -44,7 +44,7 @@ impl ExecutableDefinition {
 
     pub fn name_location(&self) -> Option<Location> {
         self.name_identifier()
-            .map(|identifier| self.location().with_span(identifier.span))
+            .map(|identifier| self.location().with_span(identifier.span()))
     }
 
     pub fn has_directive(&self, directive_name: StringKey) -> bool {
