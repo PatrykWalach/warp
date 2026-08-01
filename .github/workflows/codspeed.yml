@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - renovate/**
   pull_request:
   merge_group:
   # `workflow_dispatch` allows CodSpeed to trigger backtest
@@ -11,6 +12,10 @@ on:
   workflow_dispatch:
 
 permissions: {}
+
+concurrency:
+  group: ${{ github.workflow_ref }}-${{ github.ref_name != github.event.repository.default_branch && github.ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
   benchmarks:
