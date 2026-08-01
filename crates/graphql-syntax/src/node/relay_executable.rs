@@ -5,17 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-use std::fmt;
-
-use common::Location;
-use common::Span;
-use intern::string_key::StringKey;
-
 use super::relay_constant_value::*;
 use super::relay_directive::Directive;
 use super::relay_primitive::*;
 use super::relay_type_annotation::*;
 use super::value::*;
+use common::Location;
+use common::Span;
+use intern::string_key::StringKey;
+use std::fmt;
 
 #[derive(Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub enum ExecutableDefinition {
@@ -218,12 +216,24 @@ impl fmt::Debug for Selection {
     }
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
+#[derive(Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct FragmentSpread {
     pub spread: Token,
     pub name: Identifier,
     pub arguments: Option<List<Argument>>,
     pub directives: Vec<Directive>,
+}
+
+impl fmt::Debug for FragmentSpread {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("FragmentSpread")
+            .field("span", &self.span())
+            .field("spread", &self.spread)
+            .field("name", &self.name)
+            .field("arguments", &self.arguments)
+            .field("directives", &self.directives)
+            .finish()
+    }
 }
 
 impl FragmentSpread {
@@ -239,12 +249,24 @@ impl FragmentSpread {
     }
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
+#[derive(Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct InlineFragment {
     pub spread: Token,
     pub type_condition: Option<TypeCondition>,
     pub directives: Vec<Directive>,
     pub selections: List<Selection>,
+}
+
+impl fmt::Debug for InlineFragment {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("InlineFragment")
+            .field("span", &self.span())
+            .field("spread", &self.spread)
+            .field("type_condition", &self.type_condition)
+            .field("directives", &self.directives)
+            .field("selections", &self.selections)
+            .finish()
+    }
 }
 
 impl InlineFragment {
@@ -260,13 +282,26 @@ impl InlineFragment {
     }
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
+#[derive(Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct LinkedField {
     pub alias: Option<Alias>,
     pub name: Identifier,
     pub arguments: Option<List<Argument>>,
     pub directives: Vec<Directive>,
     pub selections: List<Selection>,
+}
+
+impl fmt::Debug for LinkedField {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("LinkedField")
+            .field("span", &self.span())
+            .field("alias", &self.alias)
+            .field("name", &self.name)
+            .field("arguments", &self.arguments)
+            .field("directives", &self.directives)
+            .field("selections", &self.selections)
+            .finish()
+    }
 }
 
 impl LinkedField {
@@ -287,12 +322,24 @@ impl LinkedField {
     }
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
+#[derive(Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct ScalarField {
     pub alias: Option<Alias>,
     pub name: Identifier,
     pub arguments: Option<List<Argument>>,
     pub directives: Vec<Directive>,
+}
+
+impl fmt::Debug for ScalarField {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("ScalarField")
+            .field("span", &self.span())
+            .field("alias", &self.alias)
+            .field("name", &self.name)
+            .field("arguments", &self.arguments)
+            .field("directives", &self.directives)
+            .finish()
+    }
 }
 
 impl ScalarField {
