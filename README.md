@@ -1,5 +1,7 @@
 # Vite+ Monorepo Starter
 
+[![CodSpeed](https://img.shields.io/endpoint?url=https://codspeed.io/badge.json)](https://app.codspeed.io/PatrykWalach/warp?utm_source=badge)
+
 A starter for creating a Vite+ monorepo.
 
 ## Development
