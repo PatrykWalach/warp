@@ -8,6 +8,10 @@ edition = "2021"
 repository = "https://github.com/facebook/relay"
 license = "MIT"
 
+[[bench]]
+name = "sign_bench"
+harness = false
+
 [dependencies]
 hex = "0.4.3"
 lazy_static = "1.4"
@@ -17,3 +21,6 @@ regex = "1.9.2"
 [lints.clippy]
 all = "allow"
 pedantic = "allow"
+
+[dev-dependencies]
+divan = { version = "5.0.1", package = "codspeed-divan-compat" }

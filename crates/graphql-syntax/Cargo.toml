@@ -16,6 +16,18 @@ path = "tests/print_test.rs"
 name = "parse_document_bench"
 harness = false
 
+[[bench]]
+name = "parse_executable_document_bench"
+harness = false
+
+[[bench]]
+name = "parse_schema_document_bench"
+harness = false
+
+[[bench]]
+name = "print_bench"
+harness = false
+
 [dependencies]
 common = { path = "../common" }
 intern = { path = "../intern" }

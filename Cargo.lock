@@ -751,6 +751,7 @@ name = "intern"
 version = "0.0.4"
 dependencies = [
  "bincode",
+ "codspeed-divan-compat",
  "fnv",
  "hashbrown 0.12.3",
  "indexmap 2.14.0",
@@ -1304,6 +1305,7 @@ dependencies = [
 name = "signedsource"
 version = "0.0.0"
 dependencies = [
+ "codspeed-divan-compat",
  "hex",
  "lazy_static",
  "md-5",
