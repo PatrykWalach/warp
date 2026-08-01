@@ -6,6 +6,12 @@
       "sourceType": "github",
       "skillPath": "skills/codspeed-optimize/SKILL.md",
       "computedHash": "1c810d6ad436703ad536a9bbd5b56256f0c55b414226514268c5a91bec62c168"
+    },
+    "writing-great-skills": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/writing-great-skills/SKILL.md",
+      "computedHash": "141d1a43348257160910bdb5d828ca6f404fb8bb1dff72ec7c619434381fde6d"
     }
   }
 }
