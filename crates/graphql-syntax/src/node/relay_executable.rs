@@ -190,10 +190,10 @@ pub enum Selection {
 impl Selection {
     pub fn span(&self) -> Span {
         match self {
-            Selection::FragmentSpread(node) => node.span,
-            Selection::InlineFragment(node) => node.span,
-            Selection::LinkedField(node) => node.span,
-            Selection::ScalarField(node) => node.span,
+            Selection::FragmentSpread(node) => node.span(),
+            Selection::InlineFragment(node) => node.span(),
+            Selection::LinkedField(node) => node.span(),
+            Selection::ScalarField(node) => node.span(),
         }
     }
 
@@ -220,25 +220,48 @@ impl fmt::Debug for Selection {
 
 #[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct FragmentSpread {
-    pub span: Span,
     pub spread: Token,
     pub name: Identifier,
     pub arguments: Option<List<Argument>>,
     pub directives: Vec<Directive>,
 }
 
+impl FragmentSpread {
+    pub fn span(&self) -> Span {
+        let mut end = self.name.span.end;
+        if let Some(arguments) = &self.arguments {
+            end = end.max(arguments.span.end);
+        }
+        if let Some(directive) = self.directives.last() {
+            end = end.max(directive.span.end);
+        }
+        Span::new(self.spread.span.start, end)
+    }
+}
+
 #[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct InlineFragment {
-    pub span: Span,
     pub spread: Token,
     pub type_condition: Option<TypeCondition>,
     pub directives: Vec<Directive>,
     pub selections: List<Selection>,
 }
 
+impl InlineFragment {
+    pub fn span(&self) -> Span {
+        let mut end = self.selections.span.end;
+        if let Some(type_condition) = &self.type_condition {
+            end = end.max(type_condition.span.end);
+        }
+        if let Some(directive) = self.directives.last() {
+            end = end.max(directive.span.end);
+        }
+        Span::new(self.spread.span.start, end)
+    }
+}
+
 #[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct LinkedField {
-    pub span: Span,
     pub alias: Option<Alias>,
     pub name: Identifier,
     pub arguments: Option<List<Argument>>,
@@ -246,11 +269,45 @@ pub struct LinkedField {
     pub selections: List<Selection>,
 }
 
+impl LinkedField {
+    pub fn span(&self) -> Span {
+        let start = self
+            .alias
+            .as_ref()
+            .map_or_else(|| self.name.span.start, |a| a.span.start);
+        let mut end = self.name.span.end;
+        if let Some(arguments) = &self.arguments {
+            end = end.max(arguments.span.end);
+        }
+        if let Some(directive) = self.directives.last() {
+            end = end.max(directive.span.end);
+        }
+        end = end.max(self.selections.span.end);
+        Span::new(start, end)
+    }
+}
+
 #[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct ScalarField {
-    pub span: Span,
     pub alias: Option<Alias>,
     pub name: Identifier,
     pub arguments: Option<List<Argument>>,
     pub directives: Vec<Directive>,
+}
+
+impl ScalarField {
+    pub fn span(&self) -> Span {
+        let start = self
+            .alias
+            .as_ref()
+            .map_or_else(|| self.name.span.start, |a| a.span.start);
+        let mut end = self.name.span.end;
+        if let Some(arguments) = &self.arguments {
+            end = end.max(arguments.span.end);
+        }
+        if let Some(directive) = self.directives.last() {
+            end = end.max(directive.span.end);
+        }
+        Span::new(start, end)
+    }
 }
