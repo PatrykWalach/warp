@@ -35,9 +35,5 @@ jobs:
           channel: stable
           cache-target: release
 
-      - name: Check
-        run: cargo check
-
       - name: Test
         run: cargo test
-        if: ${{ !cancelled() }}
