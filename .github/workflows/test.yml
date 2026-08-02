@@ -38,6 +38,10 @@ jobs:
       - name: Check
         run: cargo check
 
+      - name: Shear
+        run: cargo shear
+        if: ${{ !cancelled() }}
+
       - name: Test
         run: cargo test
         if: ${{ !cancelled() }}
