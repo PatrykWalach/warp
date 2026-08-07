@@ -13,14 +13,14 @@ name = "sign_bench"
 harness = false
 
 [dependencies]
-hex = "0.4.3"
-lazy_static = "1.4"
-md-5 = "0.10"
-regex = "1.9.2"
+hex = "=0.4.3"
+lazy_static = "=1.5.0"
+md-5 = "=0.10.6"
+regex = "=1.13.1"
 
 [lints.clippy]
 all = "allow"
 pedantic = "allow"
 
 [dev-dependencies]
-divan = { version = "5.0.1", package = "codspeed-divan-compat" }
+divan = { version = "=5.0.1", package = "codspeed-divan-compat" }
