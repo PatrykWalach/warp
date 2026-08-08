@@ -15,7 +15,7 @@ harness = false
 [dependencies]
 hex = "0.4.3"
 lazy_static = "1.4"
-md-5 = "0.10"
+md-5 = "0.11"
 regex = "1.9.2"
 
 [lints.clippy]
