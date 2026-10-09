@@ -8,7 +8,7 @@ edition = "2024"
 license = "MIT"
 
 [workspace.dependencies]
-bincode = { version = "2", features = ["serde"] }
+bincode = { version = "3", features = ["serde"] }
 clap = { version = "4.5.18", features = ["derive"] }
 colored = "2.0.4"
 hex = "0.4.3"
