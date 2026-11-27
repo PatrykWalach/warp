@@ -31,15 +31,15 @@ harness = false
 [dependencies]
 common = { path = "../common" }
 intern = { path = "../intern" }
-logos = "0.12"
-serde = { version = "1.0.185", features = ["derive", "rc"] }
-thiserror = "1.0.49"
+logos = "=0.12.1"
+serde = { version = "=1.0.229", features = ["derive", "rc"] }
+thiserror = "=1.0.69"
 
 [dev-dependencies]
-divan = { version = "5.0.1", package = "codspeed-divan-compat" }
+divan = { version = "=5.0.1", package = "codspeed-divan-compat" }
 fixture-tests = { path = "../fixture-tests" }
 graphql-cli = { path = "../graphql-cli" }
-tokio = { version = "1.29.1", features = ["full", "test-util", "tracing"] }
+tokio = { version = "=1.43.0", features = ["full", "test-util", "tracing"] }
 
 [lints.clippy]
 all = "allow"
